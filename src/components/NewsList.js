@@ -8,13 +8,14 @@ import { fetchNews } from '../actions';
 class NewsList extends Component {
 
     componentWillMount() {
-        this.props.fetchNews();
-        this.createDataSource(this.props.news);
+        const app = this.props.app;
+        this.props.fetchNews({ app });
+        this.createDataSource(this.props);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     this.createDataSource(nextProps);
-    // }
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps);
+    }
 
     createDataSource({ news }) {
         const ds = new ListView.DataSource({
@@ -42,17 +43,8 @@ class NewsList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps', state.news);
-    const newsList = _.map(state.news, (news, i) => {
-        let id = news.get('id');
-        let title = news.get('title');
-        let preview = news.get('prevew');
-        let content = news.get('content');
-        let createdAt = news.get('createdAt');
-        return { id, title, preview, content, createdAt };
-    });
-
-    return { news: newsList };
+    const news = state.news;
+    return { news };
 };
 
 export default connect(mapStateToProps, {
