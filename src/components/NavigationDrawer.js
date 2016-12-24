@@ -16,6 +16,7 @@ class NavigationDrawer extends Component {
             <Drawer
                 ref="navigation"
                 type="displace"
+                open={state.open}
                 onOpen={() => Actions.refresh({ key: state.key, open: true })}
                 onClose={() => Actions.refresh({ key: state.key, open: false })}
                 content={<MenuSide />}

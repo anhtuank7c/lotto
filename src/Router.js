@@ -15,25 +15,26 @@ const RouterComponent = ({ loading, needSignIn, app }) => (
     loading ?
         <Spinner size="large" /> :
         <Router createReducer={reducerCreate}>
-            <Scene key="sidebar" component={NavigationDrawer}>
-                <Scene
-                    key="news_list"
-                    component={NewsList}
-                    title="News List"
-                    app={app}
-                    initial={!needSignIn}
-                    type="replace"
-                    />
-
-                <Scene
-                    key="auth_sign_in"
-                    component={SignIn}
-                    app={app}
-                    initial={needSignIn}
-                    type="reset"
-                    hideNavBar
-                    hideTabBar
-                    />
+            <Scene
+                key="auth_sign_in"
+                component={SignIn}
+                app={app}
+                initial={needSignIn}
+                type="reset"
+                hideNavBar
+                hideTabBar
+                />
+            <Scene key="drawer" component={NavigationDrawer} initial={!needSignIn}>
+                <Scene key="main">
+                    <Scene
+                        key="news_list"
+                        component={NewsList}
+                        title="News List"
+                        app={app}
+                        type="replace"
+                        sceneStyle={{ paddingTop: 65 }}
+                        />
+                </Scene>
             </Scene>
         </Router>
 );
@@ -41,7 +42,8 @@ const RouterComponent = ({ loading, needSignIn, app }) => (
 // ownProps is props of this component transfered from parent component
 const mapStateToProps = (state, ownProps) => ({
     loading: !state.storage.storageLoaded,
-    needSignIn: !ownProps.app.get('token'),
+    // needSignIn: !ownProps.app.get('token'),
+    needSignIn: false,
     app: ownProps.app
 });
 
