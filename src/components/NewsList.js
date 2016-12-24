@@ -1,7 +1,7 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { CardSection } from './common';
 
 import { fetchNews } from '../actions';
 
@@ -26,9 +26,9 @@ class NewsList extends Component {
 
     renderRow(news) {
         return (
-            <View>
+            <CardSection>
                 <Text>{news.title}</Text>
-            </View>
+            </CardSection>
         );
     }
 
