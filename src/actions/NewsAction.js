@@ -6,8 +6,8 @@ import {
     NEWS_DELETE
 } from './types';
 
-export const fetchNews = ({ app }) => {
-    const Albums = app.service('albums');
+export const fetchNews = ({ conn }) => {
+    const Albums = conn.service('albums');
 
     return (dispatch) => {
         Albums.find({}).then(result => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View, Text } from 'react-native';
+import { ListView, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection } from './common';
 
@@ -8,8 +8,9 @@ import { fetchNews } from '../actions';
 class NewsList extends Component {
 
     componentWillMount() {
-        const app = this.props.app;
-        this.props.fetchNews({ app });
+        const { conn } = this.props.db;
+
+        this.props.fetchNews({ conn });
         this.createDataSource(this.props);
     }
 
