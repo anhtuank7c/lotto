@@ -21,6 +21,7 @@ class MenuSide extends Component {
             profileSubInfoStyle,
             ownerContainerStyle
         } = styles;
+        const { win, play } = this.props;
 
         return (
             <View style={containerStyle}>
@@ -31,7 +32,7 @@ class MenuSide extends Component {
                     </TouchableOpacity>
                     <View style={profileInfoStyle}>
                         <Text style={profileNameStyle}>Tuấn Tinh Tế</Text>
-                        <Text style={profileSubInfoStyle}>Play: 10 Win: 0</Text>
+                        <Text style={profileSubInfoStyle}>Play: {play} Win: {win}</Text>
                     </View>
                 </CardSection>
 
@@ -93,7 +94,12 @@ const styles = {
     }
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+    const { statistic } = state;
+    return { win: statistic.win, play: statistic.play };
+};
+
+export default connect(mapStateToProps, {
     openDrawer,
     closeDrawer
 })(MenuSide);

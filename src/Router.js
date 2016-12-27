@@ -130,8 +130,7 @@ const mapStateToProps = (state) => {
     const { storage, auth } = state;
     return {
         loading: !storage.storageLoaded,
-        // needSignIn: !auth.authenticated,
-        needSignIn: false,
+        needSignIn: !auth.authenticated,
     };
 };
 

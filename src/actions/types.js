@@ -6,6 +6,9 @@ export const DB_DISCONNECTED = 'db_disconnected';
 export const DRAWER_OPEN = 'drawer_open';
 export const DRAWER_CLOSE = 'drawer_close';
 
+// STATISTIC
+export const STATISTIC_UPDATE = 'statistic_update';
+
 // AUTHENTICATION
 export const AUTHENTICATION_SUCCESSFUL = 'authentication_successful';
 export const AUTHENTICATION_FAILED = 'authentication_failed';
