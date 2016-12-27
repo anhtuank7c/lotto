@@ -2,7 +2,7 @@ import React, {
     PropTypes,
 } from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const propTypes = {
     selected: PropTypes.bool,

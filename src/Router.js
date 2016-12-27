@@ -78,28 +78,40 @@ const RouterComponent = ({ loading, needSignIn }) => (
                         app={app}
                         sceneStyle={{ marginTop: 65 }}
                         icon={TabIcon}
-                        iconName="ios-cube"
+                        iconName="wifi-tethering"
                         iconSize={24}
                         />
                     <Scene
                         key="lucky_number"
                         component={NewsList}
+                        title="Random"
                         app={app}
                         navigationBarStyle={{ backgroundColor: 'green' }}
                         sceneStyle={{ marginTop: 65 }}
                         icon={TabIcon}
-                        iconName="ios-nuclear-outline"
+                        iconName="location-searching"
                         iconSize={24}
                         />
                     <Scene
-                        key="result"
+                        key="prize"
                         component={NewsList}
-                        title="Result"
+                        title="Prize"
                         app={app}
                         navigationBarStyle={{ backgroundColor: 'yellow' }}
                         sceneStyle={{ marginTop: 65 }}
                         icon={TabIcon}
-                        iconName="ios-cube"
+                        iconName="trending-up"
+                        iconSize={24}
+                        />
+                    <Scene
+                        key="history"
+                        component={NewsList}
+                        title="History"
+                        app={app}
+                        navigationBarStyle={{ backgroundColor: 'yellow' }}
+                        sceneStyle={{ marginTop: 65 }}
+                        icon={TabIcon}
+                        iconName="history"
                         iconSize={24}
                         />
                 </Scene>
