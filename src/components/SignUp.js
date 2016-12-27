@@ -32,6 +32,7 @@ class SignUp extends Component {
             inputStyle,
             signUpBtn,
             signUpBtnText,
+            repasswordStyle
         } = styles;
 
         return (
@@ -76,7 +77,7 @@ class SignUp extends Component {
                         onChangeText={(password) => this.setState({ password })}
                         />
                 </CardSection>
-                <CardSection style={inputStyle}>
+                <CardSection style={[inputStyle, repasswordStyle]}>
                     <Input
                         label="Confirm Password"
                         placeholder="your password"
@@ -85,7 +86,7 @@ class SignUp extends Component {
                         onChangeText={(repassword) => this.setState({ repassword })}
                         />
                 </CardSection>
-                <CardSection style={[inputStyle]}>
+                <CardSection style={inputStyle}>
                     <Button btnStyle={signUpBtn} textStyle={signUpBtnText} onPress={this.onSignUpPress.bind(this)}>Sign up</Button>
                 </CardSection>
             </View >
@@ -99,6 +100,9 @@ const styles = {
         backgroundColor: '#f5f5f5',
         paddingLeft: 15,
         paddingRight: 15,
+    },
+    repasswordStyle: {
+        height: 60,
     },
     signIn: {
         justifyContent: 'flex-end',

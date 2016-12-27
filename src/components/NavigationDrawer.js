@@ -1,14 +1,24 @@
 import React, { PropTypes, Component } from 'react';
 import Drawer from 'react-native-drawer';
+import { connect } from 'react-redux';
 import { DefaultRenderer, Actions } from 'react-native-router-flux';
 
 import SideMenu from './SideMenu';
+import { openDrawer, closeDrawer } from '../actions';
 
 const propTypes = {
     navigationState: PropTypes.object,
 };
 
 class NavigationDrawer extends Component {
+
+    onOpen() {
+        this.props.openDrawer();
+    }
+
+    onClose() {
+        this.props.closeDrawer();
+    }
 
     render() {
         const state = this.props.navigationState;
@@ -18,9 +28,9 @@ class NavigationDrawer extends Component {
                 ref="navigation"
                 type="displace"
                 styles={drawerStyles}
-                open={state.open}
-                onOpen={() => Actions.refresh({ key: state.key, open: true })}
-                onClose={() => Actions.refresh({ key: state.key, open: false })}
+                open={this.props.drawerOpen}
+                onOpen={() => this.props.openDrawer()}
+                onClose={() => this.props.closeDrawer()}
                 content={<SideMenu />}
                 openDrawerOffset={0.2}
                 panCloseMask={0.2}
@@ -41,4 +51,12 @@ const drawerStyles = {
 };
 NavigationDrawer.propTypes = propTypes;
 
-export default NavigationDrawer;
+const mapStateToProps = (state) => {
+    const { drawerOpen } = state;
+    return { drawerOpen };
+};
+
+export default connect(mapStateToProps, {
+    openDrawer,
+    closeDrawer
+})(NavigationDrawer);

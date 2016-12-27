@@ -24,7 +24,6 @@ const styles = {
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    height: 30,
   },
   labelStyle: {
     flex: 1,

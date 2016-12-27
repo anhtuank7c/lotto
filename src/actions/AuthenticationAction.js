@@ -5,7 +5,6 @@ import {
 
 // SIGN UP
 export const signUp = ({ fullName, phone, email, password, app }) => {
-    console.log(fullName, phone, email, password, app);
     return (dispatch) => {
         app.service('users')
             .create({
@@ -25,7 +24,6 @@ export const signUp = ({ fullName, phone, email, password, app }) => {
 
 // SIGN IN
 export const signIn = ({ email, password, app }) => {
-    console.log('signIn Action', app);
     return (dispatch) => {
         app.authenticate({
             type: 'local',
@@ -41,7 +39,7 @@ export const signIn = ({ email, password, app }) => {
                 console.log('Payload', payload);
             })
             .then(user => {
-                console.log('User', user);
+                console.log('AUTHENTICATION_SUCESSFUL', user);
                 dispatch({ type: AUTHENTICATION_SUCESSFUL, payload: user });
             })
             .catch(error => {

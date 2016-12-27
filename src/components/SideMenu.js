@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import { MenuItem, CardSection } from './common';
+import { openDrawer, closeDrawer } from '../actions';
 
 class MenuSide extends Component {
     onProfilePress() {
-        Actions.refresh({
-            key: 'drawer',
-            open: false
-        });
+        this.props.closeDrawer();
+        Actions.profile();
     }
 
     render() {
@@ -93,4 +93,7 @@ const styles = {
     }
 };
 
-export default MenuSide;
+export default connect(null, {
+    openDrawer,
+    closeDrawer
+})(MenuSide);

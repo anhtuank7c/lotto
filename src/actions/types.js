@@ -2,6 +2,10 @@
 export const DB_CONNECTED = 'db_connected';
 export const DB_DISCONNECTED = 'db_disconnected';
 
+// DRAWER
+export const DRAWER_OPEN = 'drawer_open';
+export const DRAWER_CLOSE = 'drawer_close';
+
 // AUTHENTICATION
 export const AUTHENTICATION_SUCCESSFUL = 'authentication_successful';
 export const AUTHENTICATION_FAILED = 'authentication_failed';

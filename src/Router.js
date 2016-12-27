@@ -57,7 +57,8 @@ const RouterComponent = ({ loading, needSignIn }) => (
                     title="Sign up"
                     type="replace"
                     leftTitle="Back"
-                    onLeft={() => Actions.sign_in()}
+                    onLeft={() => Actions.sign_in({ type: 'replace' })}
+                    sceneStyle={{ paddingTop: 65 }}
                     />
             </Scene>
 
@@ -66,6 +67,8 @@ const RouterComponent = ({ loading, needSignIn }) => (
                 component={NavigationDrawer}
                 initial={!needSignIn}
                 hideNavBar
+                unmountScenes
+                open={false}
                 >
                 <Scene
                     key="main"
@@ -124,8 +127,7 @@ const RouterComponent = ({ loading, needSignIn }) => (
 
 // props is props of this component transfered from parent component
 const mapStateToProps = (state) => {
-    const {storage, auth } = state;
-
+    const { storage, auth } = state;
     return {
         loading: !storage.storageLoaded,
         // needSignIn: !auth.authenticated,
