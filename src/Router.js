@@ -12,6 +12,8 @@ import io from 'socket.io-client';
 // import IntroApp from './components/IntroApp';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+
+import Profile from './components/Profile';
 import NewsList from './components/NewsList';
 import NavigationDrawer from './components/NavigationDrawer';
 
@@ -114,6 +116,7 @@ const RouterComponent = ({ loading, needSignIn }) => (
                         iconName="history"
                         iconSize={24}
                         />
+                    <Scene key="profile" component={Profile} title="Profile" />
                 </Scene>
             </Scene>
         </Router>

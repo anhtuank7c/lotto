@@ -7,3 +7,4 @@ export * from './Spinner';
 export * from './Confirm';
 export * from './Link';
 export * from './TabIcon';
+export * from './MenuItem';
