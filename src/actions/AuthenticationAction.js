@@ -1,3 +1,5 @@
+import { Actions } from 'react-native-router-flux';
+
 import {
     AUTHENTICATION_SUCESSFUL,
     AUTHENTICATION_FAILED,
@@ -5,6 +7,8 @@ import {
 
 // SIGN UP
 export const signUp = ({ fullName, phone, email, password, app }) => {
+    console.log(fullName, phone, email, password, app);
+
     return (dispatch) => {
         app.service('users')
             .create({
@@ -13,10 +17,12 @@ export const signUp = ({ fullName, phone, email, password, app }) => {
                 email,
                 password
             })
-            .then(result => () => {
+            .then(result => {
                 dispatch({ type: 'SIGN_UP_SUCESSFUL', user: result });
+                Actions.sign_in({ type: 'reset' });
             })
-            .catch((err) => () => {
+            .catch(err => {
+                console.log('SIGN_UP_FAILED', err);
                 dispatch({ type: 'SIGN_UP_FAILED', error: err.message });
             });
     };
@@ -32,8 +38,8 @@ export const signIn = ({ email, password, app }) => {
         })
             .then(response => {
                 console.log('Authenticated, ', response.accessToken);
-                const verifyJWT = app.passport.verifyJWT(response.accessToken);
-                console.log('Verify JWT', verifyJWT);
+                // const verifyJWT = app.passport.verifyJWT(response.accessToken);
+                // console.log('Verify JWT', verifyJWT);
             })
             .then(payload => {
                 console.log('Payload', payload);

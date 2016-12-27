@@ -1,6 +1,9 @@
 import {
     AUTHENTICATION_SUCCESSFUL,
-    AUTHENTICATION_FAILED
+    AUTHENTICATION_FAILED,
+    SIGN_UP_FAILED,
+    SIGN_UP_SUCESSFUL,
+
 } from '../actions/types';
 
 const INITIAL = {
@@ -13,6 +16,8 @@ export default (state = INITIAL, action) => {
             return { ...state, authenticated: true, user: action.payload };
         case AUTHENTICATION_FAILED:
             return INITIAL;
+        case SIGN_UP_FAILED:
+        case SIGN_UP_SUCESSFUL:
         default:
             return state;
     }

@@ -13,6 +13,10 @@ export const STATISTIC_UPDATE = 'statistic_update';
 export const AUTHENTICATION_SUCCESSFUL = 'authentication_successful';
 export const AUTHENTICATION_FAILED = 'authentication_failed';
 
+// SIGN UP
+export const SIGN_UP_SUCESSFUL = 'sign_up_sucessful';
+export const SIGN_UP_FAILED = 'sign_up_failed';
+
 // DATABASE FEATHERS
 export const DB_CONNECTION_OK = 'db_connection_ok';
 export const DB_CONNECTION_FAILED = 'db_connection_failed';
