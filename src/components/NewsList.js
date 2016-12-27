@@ -8,9 +8,9 @@ import { fetchNews } from '../actions';
 class NewsList extends Component {
 
     componentWillMount() {
-        const { conn } = this.props.db;
+        const { app } = this.props;
 
-        this.props.fetchNews({ conn });
+        this.props.fetchNews({ app });
         this.createDataSource(this.props);
     }
 

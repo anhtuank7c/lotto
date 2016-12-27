@@ -113,12 +113,8 @@ const styles = {
     },
 };
 
-const mapStateToProps = (state, props) => {
-    const { app } = props;
-    return {
-        auth: state.auth,
-        app
-    };
-};
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
 
 export default connect(mapStateToProps, { signIn })(SignIn);

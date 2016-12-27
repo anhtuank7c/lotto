@@ -4,7 +4,7 @@ import {
 } from '../actions/types';
 
 const INITIAL = {
-    authenticated: false,
+    authenticated: true,
     user: undefined
 };
 export default (state = INITIAL, action) => {

@@ -35,7 +35,7 @@ class SignUp extends Component {
         } = styles;
 
         return (
-            <View>
+            <View style={container}>
                 <CardSection style={inputStyle}>
                     <Input
                         label="Full name"
@@ -128,10 +128,10 @@ const styles = {
     },
 };
 
-const mapStateToProps = (state, props) => {
-    const { app } = props;
+const mapStateToProps = (state) => {
+    const { auth } = state;
     return {
-        app
+        auth
     };
 };
 

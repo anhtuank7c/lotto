@@ -15,7 +15,7 @@ import SignUp from './components/SignUp';
 import NewsList from './components/NewsList';
 import NavigationDrawer from './components/NavigationDrawer';
 
-import { Spinner } from './components/common';
+import { Spinner, TabIcon } from './components/common';
 
 const socket = io('http://albums.crabstudio.info', {
     transports: ['websocket'],
@@ -37,7 +37,7 @@ const reducerCreate = (params) => (state, action) => Reducer(params)(state, acti
 const RouterComponent = ({ loading, needSignIn }) => (
     loading ?
         <Spinner size="large" /> :
-        <Router createReducer={reducerCreate} sceneStyle={{ paddingTop: 65 }}>
+        <Router createReducer={reducerCreate}>
 
             <Scene key="auth">
                 <Scene
@@ -59,15 +59,48 @@ const RouterComponent = ({ loading, needSignIn }) => (
                     />
             </Scene>
 
-            <Scene key="drawer" component={NavigationDrawer} initial={!needSignIn}>
-                <Scene key="main">
+            <Scene
+                key="drawer"
+                component={NavigationDrawer}
+                initial={!needSignIn}
+                hideNavBar
+                >
+                <Scene
+                    key="main"
+                    tabs
+                    tabBarStyle={styles.tabBarStyle}
+                    tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}
+                    >
                     <Scene
                         key="news_list"
                         component={NewsList}
-                        title="News List"
+                        title="News"
                         app={app}
-                        type="replace"
-                        sceneStyle={{ paddingTop: 65 }}
+                        sceneStyle={{ marginTop: 65 }}
+                        icon={TabIcon}
+                        iconName="ios-cube"
+                        iconSize={24}
+                        />
+                    <Scene
+                        key="lucky_number"
+                        component={NewsList}
+                        app={app}
+                        navigationBarStyle={{ backgroundColor: 'green' }}
+                        sceneStyle={{ marginTop: 65 }}
+                        icon={TabIcon}
+                        iconName="ios-nuclear-outline"
+                        iconSize={24}
+                        />
+                    <Scene
+                        key="result"
+                        component={NewsList}
+                        title="Result"
+                        app={app}
+                        navigationBarStyle={{ backgroundColor: 'yellow' }}
+                        sceneStyle={{ marginTop: 65 }}
+                        icon={TabIcon}
+                        iconName="ios-cube"
+                        iconSize={24}
                         />
                 </Scene>
             </Scene>
@@ -76,12 +109,28 @@ const RouterComponent = ({ loading, needSignIn }) => (
 
 // props is props of this component transfered from parent component
 const mapStateToProps = (state) => {
-    const { storage, auth } = state;
+    const {storage, auth } = state;
 
     return {
         loading: !storage.storageLoaded,
-        needSignIn: !auth.authenticated,
+        // needSignIn: !auth.authenticated,
+        needSignIn: false,
     };
+};
+
+const styles = {
+    container: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tabBarStyle: {
+        backgroundColor: '#eee',
+    },
+    tabBarSelectedItemStyle: {
+        backgroundColor: '#ddd',
+    },
 };
 
 export default connect(mapStateToProps)(RouterComponent);

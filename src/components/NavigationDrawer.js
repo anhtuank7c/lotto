@@ -2,13 +2,14 @@ import React, { PropTypes, Component } from 'react';
 import Drawer from 'react-native-drawer';
 import { DefaultRenderer, Actions } from 'react-native-router-flux';
 
-import MenuSide from './MenuSide';
+import SideMenu from './SideMenu';
 
 const propTypes = {
     navigationState: PropTypes.object,
 };
 
 class NavigationDrawer extends Component {
+
     render() {
         const state = this.props.navigationState;
         const children = state.children;
@@ -16,14 +17,15 @@ class NavigationDrawer extends Component {
             <Drawer
                 ref="navigation"
                 type="displace"
+                styles={drawerStyles}
                 open={state.open}
                 onOpen={() => Actions.refresh({ key: state.key, open: true })}
                 onClose={() => Actions.refresh({ key: state.key, open: false })}
-                content={<MenuSide />}
-                tapToClose
+                content={<SideMenu />}
                 openDrawerOffset={0.2}
                 panCloseMask={0.2}
                 negotiatePan
+                tapToClose
                 tweenHandler={(ratio) => ({
                     main: { opacity: Math.max(0.54, 1 - ratio) },
                 })}
@@ -33,7 +35,10 @@ class NavigationDrawer extends Component {
         );
     }
 }
-
+const drawerStyles = {
+    drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 1 },
+    main: { paddingLeft: 1 },
+};
 NavigationDrawer.propTypes = propTypes;
 
 export default NavigationDrawer;
