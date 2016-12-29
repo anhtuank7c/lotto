@@ -1,23 +1,29 @@
 import {
+    AUTHENTICATING,
     AUTHENTICATION_SUCCESSFUL,
     AUTHENTICATION_FAILED,
-    SIGN_UP_FAILED,
-    SIGN_UP_SUCESSFUL,
-
+    DISMISS_ALERT,
+    SIGN_OUT
 } from '../actions/types';
 
 const INITIAL = {
-    authenticated: false,
-    user: undefined
+    user: undefined,
+    error: undefined,
+    loading: false
 };
 export default (state = INITIAL, action) => {
     switch (action.type) {
+        case AUTHENTICATING:
+            return { ...state, loading: true };
         case AUTHENTICATION_SUCCESSFUL:
-            return { ...state, authenticated: true, user: action.payload };
+            console.log('AUTHENTICATION_SUCCESSFUL', action.payload);
+            return { ...state, ...INITIAL, user: action.payload };
         case AUTHENTICATION_FAILED:
+            return { ...state, ...INITIAL, error: action.payload };
+        case DISMISS_ALERT:
             return INITIAL;
-        case SIGN_UP_FAILED:
-        case SIGN_UP_SUCESSFUL:
+        case SIGN_OUT:
+            return INITIAL;
         default:
             return state;
     }

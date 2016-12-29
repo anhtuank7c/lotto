@@ -1,22 +1,41 @@
 // import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
+
 import {
     NEWS_FETCH_OK,
     NEWS_CREATE,
     NEWS_UPDATE,
-    NEWS_DELETE
+    NEWS_DELETE,
+    NEWS_READ
 } from './types';
 
-export const fetchNews = ({ app }) => {
-    const Albums = app.service('albums');
-
+export const fetchNews = () => {
     return (dispatch) => {
-        Albums.find({}).then(result => {
+        firebase.database().ref('/news')
+            .on('value', snapshot => {
+                dispatch({
+                    type: NEWS_FETCH_OK,
+                    payload: snapshot.val()
+                });
+            });
+    };
+};
+
+export const viewNews = ({ uid }) => {
+    return (dispatch) => {
+        firebase.database().ref(`/news/${uid}`).then(news => {
             dispatch({
-                type: NEWS_FETCH_OK,
-                payload: result.data
+                type: NEWS_READ,
+                payload: news
             });
         }).catch(error => {
-            console.log('error', error);
+            console.log(`Unable to find news: ${uid}`, error);
         });
+    };
+};
+
+export const updateNews = ({uid}) => {
+    return {
+
     };
 };

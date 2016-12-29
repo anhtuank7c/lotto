@@ -1,56 +1,45 @@
 import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
 
 import {
-    AUTHENTICATION_SUCESSFUL,
+    AUTHENTICATING,
+    AUTHENTICATION_SUCCESSFUL,
     AUTHENTICATION_FAILED,
+    DISMISS_ALERT,
+    SIGN_OUT
 } from './types';
 
-// SIGN UP
-export const signUp = ({ fullName, phone, email, password, app }) => {
-    console.log(fullName, phone, email, password, app);
-
-    return (dispatch) => {
-        app.service('users')
-            .create({
-                fullName,
-                phone,
-                email,
-                password
-            })
-            .then(result => {
-                dispatch({ type: 'SIGN_UP_SUCESSFUL', user: result });
-                Actions.sign_in({ type: 'reset' });
-            })
-            .catch(err => {
-                console.log('SIGN_UP_FAILED', err);
-                dispatch({ type: 'SIGN_UP_FAILED', error: err.message });
-            });
-    };
-};
+// DISMISS ALERT
+export const dismissAlert = () => ({ type: DISMISS_ALERT });
 
 // SIGN IN
-export const signIn = ({ email, password, app }) => {
-    return (dispatch) => {
-        app.authenticate({
-            type: 'local',
-            email,
-            password
+export const signIn = ({ email, password }) => (dispatch) => {
+    dispatch({ type: AUTHENTICATING });
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((result) => {
+            dispatch({ type: AUTHENTICATION_SUCCESSFUL, payload: result });
+            Actions.main({ type: 'reset' });
         })
-            .then(response => {
-                console.log('Authenticated, ', response.accessToken);
-                // const verifyJWT = app.passport.verifyJWT(response.accessToken);
-                // console.log('Verify JWT', verifyJWT);
-            })
-            .then(payload => {
-                console.log('Payload', payload);
-            })
-            .then(user => {
-                console.log('AUTHENTICATION_SUCESSFUL', user);
-                dispatch({ type: AUTHENTICATION_SUCESSFUL, payload: user });
-            })
-            .catch(error => {
-                console.log('AUTHENTICATION_FAILED', error);
-                dispatch({ type: AUTHENTICATION_FAILED, error });
-            });
-    };
+        .catch((error) => {
+            console.log('LOGIN FAILED', error);
+            if (error.code === 'auth/wrong-password') {
+                console.log(AUTHENTICATION_FAILED, error);
+                dispatch({ type: AUTHENTICATION_FAILED, payload: error.message });
+                return;
+            }
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(result => {
+                    dispatch({ type: AUTHENTICATION_SUCCESSFUL, payload: result });
+                    Actions.main({ type: 'reset' });
+                })
+                .catch(err => {
+                    console.log('SIGN UP FAILED', err);
+                    dispatch({ type: AUTHENTICATION_FAILED, payload: err.message });
+                });
+        });
+};
+
+export const signOut = () => (dispatch) => {
+    dispatch({ type: SIGN_OUT });
+    Actions.sign_in({ type: 'reset' });
 };

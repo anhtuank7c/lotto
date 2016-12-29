@@ -10,8 +10,11 @@ export const DRAWER_CLOSE = 'drawer_close';
 export const STATISTIC_UPDATE = 'statistic_update';
 
 // AUTHENTICATION
+export const AUTHENTICATING = 'authenticating';
 export const AUTHENTICATION_SUCCESSFUL = 'authentication_successful';
 export const AUTHENTICATION_FAILED = 'authentication_failed';
+export const DISMISS_ALERT = 'dismiss_alert';
+export const SIGN_OUT = 'sign_out';
 
 // SIGN UP
 export const SIGN_UP_SUCESSFUL = 'sign_up_sucessful';
@@ -26,5 +29,6 @@ export const NEWS_FETCH_OK = 'news_fetch_ok';
 export const NEWS_CREATE = 'news_create';
 export const NEWS_DELETE = 'news_delete';
 export const NEWS_UPDATE = 'news_update';
+export const NEWS_READ = 'news_read';
 
 

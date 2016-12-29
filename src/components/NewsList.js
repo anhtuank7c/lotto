@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { ListView, Text } from 'react-native';
 import { connect } from 'react-redux';
@@ -8,9 +9,7 @@ import { fetchNews } from '../actions';
 class NewsList extends Component {
 
     componentWillMount() {
-        const { app } = this.props;
-
-        this.props.fetchNews({ app });
+        this.props.fetchNews();
         this.createDataSource(this.props);
     }
 
@@ -44,7 +43,10 @@ class NewsList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const news = state.news;
+    console.log('News list');
+    const news = _.map(state.news, (val, uid) => {
+        return { ...val, uid };
+    });
     return { news };
 };
 

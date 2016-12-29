@@ -4,12 +4,17 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import { MenuItem, CardSection } from './common';
-import { openDrawer, closeDrawer } from '../actions';
+import { openDrawer, closeDrawer, signOut } from '../actions';
 
 class MenuSide extends Component {
     onProfilePress() {
         this.props.closeDrawer();
         Actions.profile();
+    }
+
+    onSignOutPress() {
+        this.props.closeDrawer();
+        this.props.signOut();
     }
 
     render() {
@@ -22,7 +27,8 @@ class MenuSide extends Component {
             ownerContainerStyle
         } = styles;
         const { win, play } = this.props;
-
+        const { displayName } = 'Anh Tuan';
+        // const { displayName } = this.props.auth.user;
         return (
             <View style={containerStyle}>
 
@@ -31,7 +37,7 @@ class MenuSide extends Component {
                         <Image source={{ uri: 'https://avatars0.githubusercontent.com/u/3163410?v=3&s=120' }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                     </TouchableOpacity>
                     <View style={profileInfoStyle}>
-                        <Text style={profileNameStyle}>Tuấn Tinh Tế</Text>
+                        <Text style={profileNameStyle}>{displayName}</Text>
                         <Text style={profileSubInfoStyle}>Play: {play} Win: {win}</Text>
                     </View>
                 </CardSection>
@@ -44,6 +50,7 @@ class MenuSide extends Component {
                 </MenuItem>
                 <MenuItem iconName="settings" iconSize={30}>Settings</MenuItem>
                 <MenuItem iconName="help-outline" iconSize={30}>Faq</MenuItem>
+                <MenuItem iconName="arrow-back" iconSize={30} onPress={this.onSignOutPress.bind(this)}>Sign out</MenuItem>
 
                 <CardSection style={ownerContainerStyle}>
                     <Text>
@@ -95,11 +102,12 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { statistic } = state;
-    return { win: statistic.win, play: statistic.play };
+    const { statistic, auth } = state;
+    return { win: statistic.win, play: statistic.play, auth };
 };
 
 export default connect(mapStateToProps, {
     openDrawer,
-    closeDrawer
+    closeDrawer,
+    signOut
 })(MenuSide);

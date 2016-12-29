@@ -1,15 +1,15 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-const Link = ({ title, onPress, textLinkStyle }) => (
+const Link = ({ title, onPress, style }) => (
     <TouchableOpacity onPress={onPress}>
-        <Text style={[styles.textStyle, textLinkStyle]}>{title}</Text>
+        <Text style={[styles.textLinkStyle, style]}>{title}</Text>
     </TouchableOpacity>
 );
 
 const styles = {
-    textStyle: {
-        color: '#3f51b5',
+    textLinkStyle: {
+        color: '#fff',
         textDecorationLine: 'underline'
     }
 };
