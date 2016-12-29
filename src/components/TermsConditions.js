@@ -10,7 +10,7 @@ class TermsConditions extends Component {
         return (
             <View style={containerStyle}>
                 <View style={navigationStyle}>
-                    <TouchableOpacity onPress={() => Actions.sign_in()}>
+                    <TouchableOpacity onPress={() => Actions.signIn()}>
                         <Icon name="keyboard-arrow-left" size={30} style={navigationButtonStyle} />
                     </TouchableOpacity>
                     <Text style={navigationTitleStyle}>Terms and conditions</Text>

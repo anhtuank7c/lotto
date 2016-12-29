@@ -13,8 +13,8 @@ class MenuSide extends Component {
     }
 
     onSignOutPress() {
-        this.props.closeDrawer();
         this.props.signOut();
+        // this.props.closeDrawer();
     }
 
     render() {

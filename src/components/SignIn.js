@@ -14,7 +14,7 @@ class SignIn extends Component {
     }
 
     onTermsAndConditionPress() {
-        Actions.terms_and_conditions({ type: 'reset' });
+        Actions.termsAndConditions({ type: 'reset' });
     }
 
     onSignInPress() {

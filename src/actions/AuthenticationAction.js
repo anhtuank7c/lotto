@@ -39,7 +39,10 @@ export const signIn = ({ email, password }) => (dispatch) => {
         });
 };
 
-export const signOut = () => (dispatch) => {
-    dispatch({ type: SIGN_OUT });
-    Actions.sign_in({ type: 'reset' });
+export const signOut = () => {
+    return (dispatch) => {
+        console.log('Sign out');
+        dispatch({ type: SIGN_OUT });
+        Actions.signIn({ type: 'reset' });
+    };
 };
