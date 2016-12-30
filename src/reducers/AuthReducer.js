@@ -7,17 +7,30 @@ import {
 } from '../actions/types';
 
 const INITIAL = {
-    user: undefined,
     error: undefined,
-    loading: false
+    loading: false,
+    displayName: '',
+    email: '',
+    emailVerified: false,
+    photoUrl: '',
+    refreshToken: undefined,
+    uid: undefined,
 };
 export default (state = INITIAL, action) => {
     switch (action.type) {
         case AUTHENTICATING:
             return { ...state, loading: true };
         case AUTHENTICATION_SUCCESSFUL:
-            console.log('AUTHENTICATION_SUCCESSFUL', action.payload);
-            return { ...state, ...INITIAL, user: action.payload };
+            return {
+                ...state,
+                ...INITIAL,
+                email: action.payload.email,
+                displayName: action.payload.displayName,
+                emailVerified: action.payload.emailVerified,
+                photoUrl: action.payload.photoUrl,
+                refreshToken: action.payload.refreshToken,
+                uid: action.payload.uid
+            };
         case AUTHENTICATION_FAILED:
             return { ...state, ...INITIAL, error: action.payload };
         case DISMISS_ALERT:

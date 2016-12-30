@@ -7,9 +7,9 @@ import StatisticReducer from './StatisticReducer';
 import RouteReducer from './RouteReducer';
 
 export default combineReducers({
-    news: NewsReducer,
-    auth: AuthReducer,
-    drawerOpen: DrawerReducer,
-    statistic: StatisticReducer,
-    routes: RouteReducer,
+    NewsReducer,
+    AuthReducer,
+    DrawerReducer,
+    StatisticReducer,
+    RouteReducer,
 });

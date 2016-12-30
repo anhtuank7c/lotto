@@ -1,72 +1,90 @@
 import React from 'react';
 // import { ToastAndroid } from 'react-native';
-import { Router, Scene, Reducer } from 'react-native-router-flux';
-// import { connect } from 'react-redux';
+import { Router, Scene } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 // import IntroApp from './components/IntroApp';
 import SignIn from './components/SignIn';
 import TermsConditions from './components/TermsConditions';
 
 import Profile from './components/Profile';
+import Setting from './components/Setting';
+import Guideline from './components/Guideline';
+import LuckyDraw from './components/LuckyDraw';
 import NewsList from './components/NewsList';
 import NavigationDrawer from './components/NavigationDrawer';
 
 import { TabIcon } from './components/common';
 
-const reducerCreate = (params) => (state, action) => Reducer(params)(state, action);
+const RouterWithRedux = connect()(Router);
 
 const RouterComponent = () => {
     return (
-        <Router createReducer={reducerCreate}>
-            <Scene key="root">
+        <RouterWithRedux>
+            <Scene
+                key="drawer"
+                component={NavigationDrawer}
+                hideNavBar
+                unmountScenes
+                >
+                <Scene key="auth" hideNavBar>
+                    <Scene
+                        key='signIn'
+                        component={SignIn}
+                        initial
+                        />
+                    <Scene
+                        key='termsConditions'
+                        component={TermsConditions}
+                        />
+                </Scene>
                 <Scene
-                    key="drawer"
-                    component={NavigationDrawer}
+                    key="tabbar"
+                    tabs
+                    tabBarStyle={styles.tabBarStyle}
+                    tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}
+                    hideNavBar
                     >
                     <Scene
-                        key="main"
-                        tabs
-                        tabBarStyle={styles.tabBarStyle}
-                        tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}
-                        unmountScenes
-                        >
-                        <Scene
-                            key="newsList"
-                            component={NewsList}
-                            title="News"
-                            sceneStyle={{ marginTop: 65 }}
-                            icon={TabIcon}
-                            iconName="wifi-tethering"
-                            iconSize={24}
-                            />
-                        <Scene
-                            key="luckyDraw"
-                            component={NewsList}
-                            title="luckyDraw"
-                            sceneStyle={{ marginTop: 65 }}
-                            icon={TabIcon}
-                            iconName="wifi-tethering"
-                            iconSize={24}
-                            />
-                        <Scene
-                            key="guideline"
-                            component={NewsList}
-                            title="Guideline"
-                            sceneStyle={{ marginTop: 65 }}
-                            icon={TabIcon}
-                            iconName="wifi-tethering"
-                            iconSize={24}
-                            />
-                        <Scene
-                            key="profile"
-                            component={Profile}
-                            title="Profile"
-                            sceneStyle={{ marginTop: 65 }}
-                            />
-                    </Scene>
+                        key="profile"
+                        component={Profile}
+                        title="Profile"
+                        sceneStyle={{ paddingTop: 65 }}
+                        />
+                    <Scene
+                        key="setting"
+                        component={Setting}
+                        title="Setting"
+                        sceneStyle={{ paddingTop: 65 }}
+                        />
+                    <Scene
+                        key="newsList"
+                        component={NewsList}
+                        title="News List"
+                        icon={TabIcon}
+                        iconName="wifi-tethering"
+                        iconSize={24}
+                        initial
+                        />
+                    <Scene
+                        key="luckyDraw"
+                        component={LuckyDraw}
+                        title="luckyDraw"
+                        icon={TabIcon}
+                        iconName="wifi-tethering"
+                        iconSize={24}
+                        />
+                    <Scene
+                        key="guideline"
+                        component={Guideline}
+                        title="guideline"
+                        icon={TabIcon}
+                        iconName="wifi-tethering"
+                        iconSize={24}
+                        />
                 </Scene>
             </Scene>
-        </Router >
+        </RouterWithRedux>
     );
 };
 

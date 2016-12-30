@@ -3,13 +3,17 @@ import {
     DRAWER_CLOSE
 } from '../actions/types';
 
-export default (state, action) => {
+const INITIAL = {
+    open: false
+};
+
+export default (state = INITIAL, action) => {
     switch (action.type) {
         case DRAWER_OPEN:
-            return true;
+            return { ...state, open: true };
         case DRAWER_CLOSE:
-            return false;
+            return INITIAL;
         default:
-            return false;
+            return state;
     }
 };

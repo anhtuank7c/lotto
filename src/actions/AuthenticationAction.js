@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import firebase from 'firebase';
 
 import {
@@ -18,7 +18,7 @@ export const signIn = ({ email, password }) => (dispatch) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((result) => {
             dispatch({ type: AUTHENTICATION_SUCCESSFUL, payload: result });
-            Actions.main({ type: 'reset' });
+            Actions.tabbar({ type: ActionConst.REPLACE });
         })
         .catch((error) => {
             console.log('LOGIN FAILED', error);
@@ -30,7 +30,7 @@ export const signIn = ({ email, password }) => (dispatch) => {
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then(result => {
                     dispatch({ type: AUTHENTICATION_SUCCESSFUL, payload: result });
-                    Actions.main({ type: 'reset' });
+                    Actions.tabbar({ type: ActionConst.REPLACE });
                 })
                 .catch(err => {
                     console.log('SIGN UP FAILED', err);
@@ -41,8 +41,7 @@ export const signIn = ({ email, password }) => (dispatch) => {
 
 export const signOut = () => {
     return (dispatch) => {
-        console.log('Sign out');
         dispatch({ type: SIGN_OUT });
-        Actions.signIn({ type: 'reset' });
+        Actions.auth({ type: ActionConst.REPLACE });
     };
 };

@@ -9,12 +9,17 @@ import { openDrawer, closeDrawer, signOut } from '../actions';
 class MenuSide extends Component {
     onProfilePress() {
         this.props.closeDrawer();
-        Actions.profile();
+        Actions.profile({ type: 'reset' });
+    }
+
+    onSettingPress() {
+        this.props.closeDrawer();
+        Actions.setting({ type: 'reset' });
     }
 
     onSignOutPress() {
         this.props.signOut();
-        // this.props.closeDrawer();
+        this.props.closeDrawer();
     }
 
     render() {
@@ -26,8 +31,7 @@ class MenuSide extends Component {
             profileSubInfoStyle,
             ownerContainerStyle
         } = styles;
-        const { win, play } = this.props;
-        const { displayName } = 'Anh Tuan';
+        const { win, play, fullName } = this.props;
         // const { displayName } = this.props.auth.user;
         return (
             <View style={containerStyle}>
@@ -37,7 +41,7 @@ class MenuSide extends Component {
                         <Image source={{ uri: 'https://avatars0.githubusercontent.com/u/3163410?v=3&s=120' }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                     </TouchableOpacity>
                     <View style={profileInfoStyle}>
-                        <Text style={profileNameStyle}>{displayName}</Text>
+                        <Text style={profileNameStyle}>{fullName}</Text>
                         <Text style={profileSubInfoStyle}>Play: {play} Win: {win}</Text>
                     </View>
                 </CardSection>
@@ -102,8 +106,14 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { statistic, auth } = state;
-    return { win: statistic.win, play: statistic.play, auth };
+    const { StatisticReducer, AuthReducer } = state;
+    const { win, play } = StatisticReducer;
+    const { fullName } = AuthReducer;
+    return {
+        win,
+        play,
+        fullName,
+    };
 };
 
 export default connect(mapStateToProps, {

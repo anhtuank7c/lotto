@@ -16,7 +16,10 @@
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-persist": "^4.0.1",
+    "redux-thunk": "^2.1.0",
+    "remote-redux-devtools": "^0.5.7",
+    "remote-redux-devtools-on-debugger": "^0.7.0"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

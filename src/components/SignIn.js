@@ -14,7 +14,7 @@ class SignIn extends Component {
     }
 
     onTermsAndConditionPress() {
-        Actions.termsAndConditions({ type: 'reset' });
+        Actions.termsConditions();
     }
 
     onSignInPress() {
@@ -24,7 +24,7 @@ class SignIn extends Component {
 
     renderButton() {
         if (this.props.loading) {
-            return <Spinner size="large" />
+            return <Spinner size="small" />
         }
         const {
             signInButton,
@@ -153,7 +153,8 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { error, loading } = state.auth;
+    const { error, loading } = state.AuthReducer;
+    console.log('Sign in', state);
     return { error, loading };
 };
 
