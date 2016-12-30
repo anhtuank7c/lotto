@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class TermsConditions extends Component {
@@ -10,7 +10,7 @@ class TermsConditions extends Component {
         return (
             <View style={containerStyle}>
                 <View style={navigationStyle}>
-                    <TouchableOpacity onPress={() => Actions.signIn()}>
+                    <TouchableOpacity onPress={() => Actions.signIn({ type: ActionConst.BACK })}>
                         <Icon name="keyboard-arrow-left" size={30} style={navigationButtonStyle} />
                     </TouchableOpacity>
                     <Text style={navigationTitleStyle}>Terms and conditions</Text>

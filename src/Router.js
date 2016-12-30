@@ -1,5 +1,4 @@
 import React from 'react';
-// import { ToastAndroid } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
